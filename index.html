@@ -3,16 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>JavaScript for Kids</title>
-    <!--
-      <script src="javascript/word-guess.js"></script>
-    --> 
+    <!-- <script src="javascript/word-guess.js"></script> -->
     <script type="text/javascript" src="javascript/new_word-guess.js"></script>
     <link rel="stylesheet" type="text/css" href="CSS/new_word-guess.css" />
   </head>
   <body>
-    <form>
-      <input type="text" placeholder="Enter a word"/>
-      <input type="button" value="Submit" onclick="make_word_secret();"/>
-    </form>
+    <div>
+      <p id="ShowedText"></p>
+      <input type="text" id="TextBox"/>
+      <input type="button" id="SubmitButton" value="Submit"/>
+    </div>
   </body>
 </html>
