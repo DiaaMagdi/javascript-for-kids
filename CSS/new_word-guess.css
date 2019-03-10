@@ -1,15 +1,68 @@
 div{
+    background-color: honeydew;
+
+    padding: 20px;
     border: 2px solid darkblue;
-    padding: 10px;
+    margin: 200px auto 0px auto;
+
+    min-width: 300px;
     width: -webkit-fit-content;
     width: -moz-fit-content;
+    
     text-align: center;
-    margin: auto;
-    background-color: honeydew;
+    
+}
+input[type=text]{
+    width: 250px;
+    height: 30px;
+
+    font-size: 1.3em;
+    text-align: center;
 }
 input[type=button]{
     background-color: green;
-    height: 23px;
-    width: 100px;
+    color: white;
+    
     border: none;
+    margin-top: 20px;
+    
+    width: 150px;
+    height: 30px;
+    
+    font-size: 16px;
+}
+p{
+    font-size: 2em;
+}
+p:first-of-type{
+    font-size: 1.3em;
+    text-align: left;
+    margin-left: 30px;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg);}
+    10% { transform: translate(-1px, -2px) rotate(-1deg);}
+    20% { transform: translate(-3px, 0px) rotate(1deg);}
+    30% { transform: translate(3px, 2px) rotate(0deg);}
+    40% { transform: translate(1px, -1px) rotate(1deg);}
+    50% { transform: translate(-1px, 2px) rotate(-1deg);}
+    60% { transform: translate(-3px, 1px) rotate(0deg);}
+    70% { transform: translate(3px, 1px) rotate(-1deg);}
+    80% { transform: translate(-1px, -1px) rotate(1deg);}
+    90% { transform: translate(1px, 2px) rotate(0deg);}
+    100% { transform: translate(1px, -2px) rotate(-1deg);}
+}
+@keyframes badGuess{
+    0% { background-color: red;}
+    10% { background-color: rgb(253.5, 25.5, 24);}
+    20% { background-color: rgb(252, 51, 48);}
+    30% { background-color: rgb(250.5, 76.5, 72);}
+    40% { background-color: rgb(249, 102, 96);}
+    50% { background-color: rgb(247.5, 127.5, 120);}
+    60% { background-color: rgb(246, 153, 144);}
+    70% { background-color: rgb(244.5, 178.5, 168);}
+    80% { background-color: rgb(243, 204, 192);}
+    90% { background-color: rgb(241.5, 229.5, 216);}
+    100% { background-color: honeydew;}
 }

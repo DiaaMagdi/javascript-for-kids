@@ -1,52 +1,57 @@
-// Guess the word one letter at a time.
-// Each player is only allowed to guess
-// wrong three times.
-
-//Global Variables
-// Create another array to store good guesses
 let secret;
-// Create a variable to store the number of bad guesses
 let strikes;
 let word;
 
 window.onload = function () {
-    var textBox = document.getElementById("TextBox");
-
-    textBox.focus();
-    textBox.addEventListener("keyup", function (event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-            document.getElementById("SubmitButton").click();
-        }
-   });
-
-   initalizePage();
+    initalizePage();
 }
 
-function initalizePage()
-{
+function initalizePage() {
+    var textBox = document.getElementById("TextBox");
+    textBox.removeEventListener("keyup", retryFocus)
+    textBox.addEventListener("keyup", submitFocus);
+
+    textBox.value = "";
+    textBox.placeholder = "Enter Your Secret Word";
+    textBox.focus();
+
     var submitButton = document.getElementById("SubmitButton");
     submitButton.removeEventListener("click", try_this_letter);
     submitButton.addEventListener("click", make_word_secret);
 
-    var textBox = document.getElementById("TextBox");
-    textBox.value = "";
-    textBox.placeholder = "Enter Your Secret Word";
-
     var showedText = document.getElementById("ShowedText");
-    showedText.innerText = "***************"
+    showedText.innerText = "********"
+
+    var wrongGuessesTextBox = document.getElementById("WrongGuesses");
+    wrongGuessesTextBox.innerText = "Wrong Guesses: ";
 
     secret = [];
     strikes = 0;
     word = "";
 }
 
+function submitFocus(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("SubmitButton").click();
+    }
+}
+
+function retryFocus(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("Retrybutton").click();
+    }
+}
+
 function make_word_secret() {
-    console.log("make_word_secret function");
     var submitButton = document.getElementById("SubmitButton");
     var showedText = document.getElementById("ShowedText");
     var textBox = document.getElementById("TextBox");
+
     word = textBox.value;
+    if (word.length == 0)
+        make_word_secret();
 
     textBox.value = "";
     textBox.placeholder = "Enter A Letter To Try";
@@ -55,8 +60,6 @@ function make_word_secret() {
     submitButton.addEventListener("click", try_this_letter);
 
 
-    // Filling the array with placeholders for guessing
-    showedText.innerText = "";
     for (i = 0; i < word.length; i++) {
         secret.push("_");
     }
@@ -64,29 +67,32 @@ function make_word_secret() {
 }
 
 function try_this_letter() {
-    console.log("try this letter funcion");
-
     var textBox = document.getElementById("TextBox");
     var showedText = document.getElementById("ShowedText");
 
-    // TODO case he enter multiple letters
     var letter = textBox.value;
     textBox.value = "";
 
-    // If the letter does not exist in the word,
-    // add it to the bad guesses.
-    if (word.indexOf(letter) < 0) {
-        // add a strike
-        strikes++;
-        //TODO change this alert
-        alert("Bad guess!");
+    if (letter.length != 1)
+        try_this_letter();
 
-        // If the letter exists in the word, we need to
-        // add it to the good guesses array
+    if (word.indexOf(letter) < 0) {
+        var wrongGuessesTextBox = document.getElementById("WrongGuesses");
+        wrongGuessesTextBox.innerText += "    " + letter;
+
+        strikes++;
+        if (strikes < 3) {
+            var DivTag = document.getElementById("Div");
+
+            DivTag.style.animation = "shake 0.5s, badGuess 0.5s";
+            setTimeout(function () {
+                DivTag.style.animation = "none";
+                DivTag.style.animation = "";
+            }, 500);
+        }
+
     } else {
         for (i = 0; i < word.length; i++) {
-            // Each time the guess letter is found, we
-            // add it as a good guess in the same spot
             if (word[i] === letter) {
                 secret[i] = letter;
             }
@@ -99,15 +105,25 @@ function try_this_letter() {
         gameOver();
 }
 function gameOver() {
+    var showedText = document.getElementById("ShowedText");
+    showedText.innerText = word;
+
+    var wrongGuessesTextBox = document.getElementById("WrongGuesses");
+    wrongGuessesTextBox.style.textAlign = "center";
+    wrongGuessesTextBox.style.marginLeft = "0px";
+
+    var DivTag = document.getElementById("Div");
+
     if (strikes === 3) {
-        alert("Sorry, please play again!");
+        wrongGuessesTextBox.innerText = "Game Over";
+        DivTag.style.animation = "shake 1s, badGuess 1s reverse";
+        DivTag.style.backgroundColor = "red";
     } else {
-        alert("Congratulations on your win!");
+        wrongGuessesTextBox.innerText = "Congratulations";
+        DivTag.style.animation = "shake 1s";
     }
-    
-    alert("The secret word was " + word);
 
-    initalizePage();
+    var textBox = document.getElementById("TextBox");
+    textBox.removeEventListener("keyup", submitFocus);
+    textBox.addEventListener("keyup", retryFocus)
 }
-
-//TODO enter same correct letter multiple times

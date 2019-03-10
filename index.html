@@ -1,17 +1,23 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>JavaScript for Kids</title>
-    <!-- <script src="javascript/word-guess.js"></script> -->
-    <script type="text/javascript" src="javascript/new_word-guess.js"></script>
-    <link rel="stylesheet" type="text/css" href="CSS/new_word-guess.css" />
-  </head>
-  <body>
-    <div>
-      <p id="ShowedText"></p>
-      <input type="text" id="TextBox"/>
-      <input type="button" id="SubmitButton" value="Submit"/>
-    </div>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript for Kids</title>
+  <script type="text/javascript" src="javascript/new_word-guess.js"></script>
+  <link rel="stylesheet" type="text/css" href="CSS/new_word-guess.css" />
+</head>
+
+<body>
+  <div id="Div">
+
+    <p id="WrongGuesses"></p>
+    <p id="ShowedText"></p>
+    <input type="text" id="TextBox" /> <br>
+    <input type="button" id="SubmitButton" value="Submit" />
+    <input type="button" value="Retry" id="Retrybutton" onclick="location.reload()" />
+
+  </div>
+</body>
+
 </html>
